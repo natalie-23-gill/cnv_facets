@@ -24,6 +24,7 @@
 
 suppressMessages(library(argparse))
 suppressMessages(library(facets))
+suppressMessages(library(facets-suite))
 suppressMessages(library(data.table))
 suppressMessages(library(Rsamtools))
 suppressMessages(library(ggplot2))
@@ -850,6 +851,9 @@ if(sys.nframe() == 0){
 
     write(sprintf('[%s] Writing output', Sys.time()), stderr())
     cncf<- copy(facets$emcncf_fit$cncf)
+
+    seg_igv=format_igv_seg(facets_output=facets, sample_id= basename(xargs$out), normalize = TRUE)
+    write.delim(seg_igv,file=paste0(xargs$out, '.seg'))
 
     reset_chroms(cncf= cncf, gbuild= xargs$gbuild, chr_prefix= rcmat$chr_prefix)
     classify_cnv(cncf)

@@ -112,6 +112,13 @@ tryCatch({
 )
 
 tryCatch({
+        suppressMessages(library(facets-suite))
+    }, error = function(err) {
+        devtools::install_github("mskcc/facets-suite", ref = FACETS_REF, lib= LIB)
+    }
+)
+
+tryCatch({
         suppressMessages(library(testthat))
     }, error = function(err) {
         install.packages('testthat', repos= REPOS, lib= LIB, Ncpus= 6)
